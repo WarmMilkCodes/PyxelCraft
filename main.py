@@ -5,7 +5,7 @@ from engine.world import World
 win = pyglet.window.Window(800, 600, "Voxel Engine")
 world = World()
 
-def draw_voxel(x, y, z, size=1):
+def draw_voxel(x, y, z, color=(1, 1, 1) size=1):
     vertices = [
         x, y, z,
         x + size, y, z,
@@ -17,7 +17,7 @@ def draw_voxel(x, y, z, size=1):
         x, y + size, z + size
     ]
 
-    glColor3f(1, 0, 0)  # Red color for now
+    glColor3f(*color)
     
     # Front face
     glVertex3f(vertices[0], vertices[1], vertices[2])
@@ -25,6 +25,14 @@ def draw_voxel(x, y, z, size=1):
     glVertex3f(vertices[7], vertices[8], vertices[9])
     glVertex3f(vertices[6], vertices[7], vertices[8])
     # ... Do this for all 6 faces
+
+def draw_chuk(chunk, start_x=0, start_y=0, start_z=0):
+    for x in range(CHUNK_SIZE):
+        for y in range(CHUNK_SIZE):
+            for z in range(CHUNK_SIZE):
+                voxel = chunk.voxels[x][y][z]
+                if voxel is not None:
+                    draw_voxel(x + start_x, y + start_y, z + start_z, color=voxel)
 
 @win.event
 def on_draw():
