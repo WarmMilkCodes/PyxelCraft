@@ -1,6 +1,8 @@
 import pyglet
 from pyglet.gl import *
+from pyglet.gl.glu import *
 from engine.world import World
+from engine.chunk import CHUNK_SIZE
 from pyglet.gl import gluLookAt
 
 win = pyglet.window.Window(800, 600, "Voxel Engine")
@@ -9,7 +11,7 @@ world = World()
 chunk_position = [0, 0, 0]
 camera_position = [CHUNK_SIZE / 2, CHUNK_SIZE / 2, -CHUNK_SIZE * 1.5]
 
-def draw_voxel(x, y, z, color=(1, 1, 1) size=1):
+def draw_voxel(x, y, z, color=(1, 1, 1), size=1):
     vertices = [
         x, y, z,
         x + size, y, z,
